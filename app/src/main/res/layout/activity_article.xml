@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/headerLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars[0]" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/colorGrey"
+                    app:layout_constraintStart_toEndOf="@+id/avatar"
+                    app:layout_constraintTop_toTopOf="@+id/avatar"
+                    tools:text="recoilme" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/colorGrey"
+                    app:layout_constraintStart_toEndOf="@+id/author"
+                    app:layout_constraintTop_toTopOf="@+id/avatar"
+                    tools:text="1 ady ago" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/colorArticle"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatar"
+                    tools:text="Недетское путешествие. 4. Пат" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <ru.noties.markwon.view.MarkwonViewCompat
+                android:id="@+id/article"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:lineSpacingExtra="6dp"
+                android:textColor="@color/colorArticle"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+                tools:text="Да, да именно эти перцы придумали такую кнопку-раскладушку, это был 2011 год, если не ошибаюсь. И это было абсолютно крышесносно. Для того времени. Через 10 дней это соцсеть будет закрыта окончательно. Кроме инновационного интерфейса мобильного приложения Path предлагал и необычную концепцию “друзей”, настоящих друзей. Предполагалось что их будет мало от 50 изначально, и до 150 позднее. Возможно в этом же было и узкое место, я уже не помню как он распространялся но судя по количеству инсталов - недостаточно быстро. Судя по вики - By December 2011, it had grown from 30,000 to over 300,000 members in less than a month
+Это смешно. Он пытался быть придатком к фейсбуку и умер как придаток. Facebook blocked Path’s “Find Friends” писал течкранч. А вот что они писали при запуске Фокус на шаринге картинок и мы будем придатком к фейсбук. Напомню, что другая сеть для шаринга фоток была запущена 6 октября 2010 года. Какие то мизерные отличия в позиционировании и механике и какая разная судьба. Печально.
+Google +
+(28 июня 2011 - сегодня?)
+Action 1: We are shutting down Google+ for consumers.
+статья полна “заботы о пользователях и их персональных данных” - это выглядит как фарс дня, на фоне новости о очередной утечке персональных данных, которые этот самый гугл плюс раздавал направо и налево. В отличие от Path который позиционировался как анти социальная сеть, Гугл плюс с самого начала позиционировался как каша из всего на свете щедро приправленная “кругами”. Такими же бестолковыми как и практически все, что делает гугл. Он был “перенасыщен” с самого начала, как и предыдущий бредовый проект гугла - оркут. Тем не менее куча людей кричала о близкой смерти фейсбук - это же гугл, кричали они. Да, это тот гугл - который а/б тестами выбирает из 60 оттенков синего, вместо того чтобы сесть и решить каокй цвет лучше. Это говорит о компании все. В ней, похоже с яйцами - осталось человек 10 - судя по выпускаемым продуктам. Да не постигнет гоу судьба всего до чего дотягивается гугл.
+typegram для андроид" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <include layout="@layout/layout_error_network" />
+    <include layout="@layout/layout_loading" />
+</android.support.constraint.ConstraintLayout>
