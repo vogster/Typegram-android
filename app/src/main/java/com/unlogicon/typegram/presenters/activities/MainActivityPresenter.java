@@ -91,6 +91,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                 });
 
         FirebaseMessaging.getInstance().subscribeToTopic(Constants.TOPIC);
+        FirebaseMessaging.getInstance().subscribeToTopic(Constants.TOPIC_DEL);
 
     }
 

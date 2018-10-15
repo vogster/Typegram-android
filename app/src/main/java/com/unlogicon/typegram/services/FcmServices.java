@@ -3,6 +3,7 @@ package com.unlogicon.typegram.services;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.unlogicon.typegram.Constants;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.abstracts.AppDatabase;
 import com.unlogicon.typegram.interfaces.dao.ArticlesDao;
@@ -40,8 +41,11 @@ public class FcmServices extends FirebaseMessagingService {
                 articles.setBody(remoteMessage.getData().get("body"));
                 articles.setID(Integer.parseInt(remoteMessage.getData().get("ID")));
                 articles.setTitle(remoteMessage.getData().get("title"));
-
-                articlesDao.insertAll(articles);
+                if (remoteMessage.getFrom().equals("/topics/" + Constants.TOPIC)) {
+                    articlesDao.insertAll(articles);
+                } else if (remoteMessage.getFrom().equals("/topics/" + Constants.TOPIC_DEL)){
+                    articlesDao.delete(articles);
+                }
             }
         };
     }

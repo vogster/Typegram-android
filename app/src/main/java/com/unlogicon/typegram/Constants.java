@@ -16,6 +16,7 @@ public class Constants {
 
     //Тест
     public static final String TOPIC = "tst_all";
+    public static final String TOPIC_DEL = "tst_del";
 
     public static final String BASE_AVA_URL = "https://ru.tgr.am/a/%s.png";
 }
