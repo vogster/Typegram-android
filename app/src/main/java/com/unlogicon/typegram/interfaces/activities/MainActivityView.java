@@ -11,4 +11,6 @@ public interface MainActivityView extends MvpView {
     void notifyDataSetChanged(MainRecyclerViewAdapter adapter);
 
     void addOnScrollListener(EndlessRecyclerViewScrollListener listener);
+
+    void startActivityLogin();
 }

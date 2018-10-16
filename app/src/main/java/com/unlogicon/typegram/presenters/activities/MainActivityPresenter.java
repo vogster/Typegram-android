@@ -3,6 +3,7 @@ package com.unlogicon.typegram.presenters.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -128,6 +129,14 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                     }
 
                 });
+    }
+
+    public void onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_open_in_web:
+                getViewState().startActivityLogin();
+                break;
+        }
     }
 
     private void onError(Throwable throwable) {

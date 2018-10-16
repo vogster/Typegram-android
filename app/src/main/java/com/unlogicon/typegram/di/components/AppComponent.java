@@ -6,6 +6,7 @@ import com.unlogicon.typegram.di.modules.NetworkModule;
 import com.unlogicon.typegram.di.modules.RoomModule;
 import com.unlogicon.typegram.di.modules.SharedPreferencesModule;
 import com.unlogicon.typegram.presenters.activities.ArticleActivityPresenter;
+import com.unlogicon.typegram.presenters.activities.LoginPresenter;
 import com.unlogicon.typegram.presenters.activities.MainActivityPresenter;
 import com.unlogicon.typegram.services.FcmServices;
 
@@ -28,5 +29,7 @@ public interface AppComponent {
     void inject(MainActivityPresenter presenter);
 
     void inject(FcmServices services);
+
+    void inject(LoginPresenter presenter);
 
 }

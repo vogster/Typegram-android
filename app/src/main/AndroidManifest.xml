@@ -26,6 +26,8 @@
 
         <activity android:name=".ui.activities.ArticleActivity"/>
 
+        <activity android:name=".ui.activities.LoginActivity"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
