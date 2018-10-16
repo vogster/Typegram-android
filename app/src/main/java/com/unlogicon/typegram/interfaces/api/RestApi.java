@@ -2,6 +2,7 @@ package com.unlogicon.typegram.interfaces.api;
 
 import com.unlogicon.typegram.models.Article;
 import com.unlogicon.typegram.models.Login;
+import com.unlogicon.typegram.models.Register;
 
 import java.util.List;
 
@@ -50,4 +51,12 @@ public interface RestApi {
     @Headers("Content-Type: application/json")
     Observable<ResponseBody> login(@Body Login body);
 
+    /**
+     * Регистрация
+     * @param body {"username":"username","password":"password","privacy":"privacy","terms":"terms"}'
+     * @return
+     */
+    @POST
+    @Headers("Content-Type: application/json")
+    Observable<ResponseBody> register(@Body Register body);
 }
