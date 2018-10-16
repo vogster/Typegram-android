@@ -38,4 +38,11 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         login = findViewById(R.id.login);
         login.setOnClickListener(presenter::onClick);
     }
+
+    @Override
+    public void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

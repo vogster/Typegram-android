@@ -10,4 +10,13 @@
         <item name="android:statusBarColor">@android:color/white</item>
     </style>
 
+    <style name="AppTheme.EditText" parent="AppTheme">
+        <item name="android:background">@drawable/drawable_border</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="AppTheme">
+        <item name="android:background">@drawable/drawable_border</item>
+    </style>
+
 </resources>

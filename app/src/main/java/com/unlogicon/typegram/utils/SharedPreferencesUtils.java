@@ -12,6 +12,8 @@ public class SharedPreferencesUtils {
 
     public static final String KEY_TOKEN = "token";
 
+    public static final String KEY_USERNAME = "username";
+
     private  SharedPreferences settings = null;
 
     private  SharedPreferences.Editor editor = null;
@@ -35,6 +37,22 @@ public class SharedPreferencesUtils {
 
     public boolean isAuth(){
         return !settings.getString(KEY_TOKEN, "").equals("");
+    }
+
+    public void singOut(){
+        editor.putString(KEY_TOKEN, "");
+        editor.commit();
+        editor.putString(KEY_USERNAME, "");
+        editor.commit();
+    }
+
+    public void setUsername(String username){
+        editor.putString(KEY_USERNAME, username);
+        editor.commit();
+    }
+
+    public String getUsername(){
+        return settings.getString(KEY_USERNAME, "");
     }
 
 }

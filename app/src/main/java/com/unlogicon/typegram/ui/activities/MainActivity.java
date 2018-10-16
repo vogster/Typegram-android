@@ -44,6 +44,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        presenter.setMMenu(menu);
         return true;
     }
 

@@ -3,6 +3,18 @@
     <string name="error_network">Что то пошло не так</string>
     <string name="retry">Повторить</string>
 
-    //Menu
+    <!-- Menu -->
     <string name="open_in_web">Открыть в браузере</string>
+    
+    <!-- Login -->
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_descr">Need an account?</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+
+    <string name="sing_out">Sign out</string>
+
+    <!-- Registration -->
+    <string name="sign_up">Sign up</string>
+    
 </resources>

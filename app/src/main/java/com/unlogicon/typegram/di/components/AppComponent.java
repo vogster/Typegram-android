@@ -8,6 +8,7 @@ import com.unlogicon.typegram.di.modules.SharedPreferencesModule;
 import com.unlogicon.typegram.presenters.activities.ArticleActivityPresenter;
 import com.unlogicon.typegram.presenters.activities.LoginPresenter;
 import com.unlogicon.typegram.presenters.activities.MainActivityPresenter;
+import com.unlogicon.typegram.presenters.activities.RegisterPresenter;
 import com.unlogicon.typegram.services.FcmServices;
 
 import javax.inject.Singleton;
@@ -32,4 +33,5 @@ public interface AppComponent {
 
     void inject(LoginPresenter presenter);
 
+    void inject(RegisterPresenter presenter);
 }

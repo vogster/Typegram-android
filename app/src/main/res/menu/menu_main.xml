@@ -2,9 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_open_in_web"
-        android:orderInCategory="300"
-        android:title="@string/open_in_web"
-        android:icon="@drawable/vector_open_in_web"
-        app:showAsAction="ifRoom"></item>
+        android:id="@+id/action_sign_in"
+        android:title="@string/sign_in"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_sign_out"
+                android:title="@string/sing_out"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+
 </menu>

@@ -63,15 +63,19 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
     }
 
     private void onSuccess(ResponseBody responseBody) {
-        try {
-            Toast.makeText(context, responseBody.string(), Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       if (responseBody != null){
+           try {
+               preferencesUtils.setToken(responseBody.string().replace("\"",""));
+               preferencesUtils.setUsername(usernameTextWatcher.getText());
+               getViewState().startMainActivity();
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+       }
     }
 
     private void onError(Throwable throwable) {
-        Log.d("Error", throwable.getLocalizedMessage());
+
     }
 
     public void setUsernameTextWatcher(EditText editText){

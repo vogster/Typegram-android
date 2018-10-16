@@ -3,6 +3,7 @@ package com.unlogicon.typegram.presenters.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.unlogicon.typegram.interfaces.activities.MainActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.interfaces.dao.ArticlesDao;
 import com.unlogicon.typegram.models.Article;
+import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,11 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     @Inject
     Context context;
 
+    @Inject
+    SharedPreferencesUtils preferencesUtils;
+
+    private Menu menu;
+
     public MainActivityPresenter() {
         TgramApplication.getInstance().getComponents().getAppComponent().inject(this);
     }
@@ -55,6 +62,8 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+
+
 
         articlesList = new ArrayList<>();
         adapter = new MainRecyclerViewAdapter(articlesList);
@@ -133,13 +142,36 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     public void onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_open_in_web:
-                getViewState().startActivityLogin();
+            case R.id.action_sign_in:
+                if (!preferencesUtils.isAuth()) {
+                    getViewState().startActivityLogin();
+                }
+                break;
+            case R.id.action_sign_out:
+                preferencesUtils.singOut();
+                updateMenuTitles(menu);
                 break;
         }
     }
 
     private void onError(Throwable throwable) {
         Toast.makeText(context, context.getString(R.string.error_network), Toast.LENGTH_LONG).show();
+    }
+
+    public void setMMenu(Menu menu) {
+        this.menu = menu;
+        updateMenuTitles(menu);
+    }
+
+    private void updateMenuTitles(Menu menu) {
+        MenuItem menuSingIn = menu.findItem(R.id.action_sign_in);
+        MenuItem menuSingOut = menu.findItem(R.id.action_sign_out);
+        if (preferencesUtils.isAuth()) {
+            menuSingIn.setTitle("@" + preferencesUtils.getUsername());
+            menuSingOut.setVisible(true);
+        } else {
+            menuSingIn.setTitle(context.getString(R.string.sign_in));
+            menuSingOut.setVisible(false);
+        }
     }
 }
