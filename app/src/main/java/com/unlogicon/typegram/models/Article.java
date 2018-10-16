@@ -1,10 +1,14 @@
 package com.unlogicon.typegram.models;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Nikita Korovkin 09.10.2018.
@@ -68,6 +72,11 @@ public class Article {
     @SerializedName("tag")
     @Expose
     private String tag;
+
+    @Ignore
+    @SerializedName("Comments")
+    @Expose
+    private List<Article> comments = new ArrayList<>();
 
     public Integer getID() {
         return iD;
@@ -182,4 +191,11 @@ public class Article {
         this.tag = tag;
     }
 
+    public List<Article> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Article> comments) {
+        this.comments = comments;
+    }
 }
