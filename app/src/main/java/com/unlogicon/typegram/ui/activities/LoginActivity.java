@@ -22,7 +22,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     LoginPresenter presenter;
 
     private AppCompatEditText username, password;
-    private AppCompatButton login;
+    private AppCompatButton login, signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +37,21 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
         login = findViewById(R.id.login);
         login.setOnClickListener(presenter::onClick);
+
+        signUp = findViewById(R.id.sign_up);
+        signUp.setOnClickListener(presenter::onClick);
     }
 
     @Override
     public void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

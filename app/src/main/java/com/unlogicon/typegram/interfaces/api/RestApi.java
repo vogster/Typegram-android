@@ -56,7 +56,7 @@ public interface RestApi {
      * @param body {"username":"username","password":"password","privacy":"privacy","terms":"terms"}'
      * @return
      */
-    @POST
+    @POST("register")
     @Headers("Content-Type: application/json")
     Observable<ResponseBody> register(@Body Register body);
 }

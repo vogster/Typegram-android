@@ -25,8 +25,9 @@
         </service>
 
         <activity android:name=".ui.activities.ArticleActivity"/>
-
         <activity android:name=".ui.activities.LoginActivity"/>
+        <activity android:name=".ui.activities.RegisterActivity"/>
+
 
     </application>
 

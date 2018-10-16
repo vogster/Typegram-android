@@ -147,7 +147,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                     getViewState().startActivityLogin();
                 }
                 break;
-            case R.id.action_sign_out:
+            case R.id.action_log_out:
                 preferencesUtils.singOut();
                 updateMenuTitles(menu);
                 break;
@@ -165,7 +165,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     private void updateMenuTitles(Menu menu) {
         MenuItem menuSingIn = menu.findItem(R.id.action_sign_in);
-        MenuItem menuSingOut = menu.findItem(R.id.action_sign_out);
+        MenuItem menuSingOut = menu.findItem(R.id.action_log_out);
         if (preferencesUtils.isAuth()) {
             menuSingIn.setTitle("@" + preferencesUtils.getUsername());
             menuSingOut.setVisible(true);

@@ -6,5 +6,8 @@ import com.arellomobile.mvp.MvpView;
  * Nikita Korovkin 16.10.2018.
  */
 public interface LoginView extends MvpView {
+
     void startMainActivity();
+
+    void startRegisterActivity();
 }

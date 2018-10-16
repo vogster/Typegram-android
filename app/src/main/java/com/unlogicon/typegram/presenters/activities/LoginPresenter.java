@@ -56,10 +56,19 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
     }
 
     public void onClick(View view) {
-        restApi.login(new Login(usernameTextWatcher.getText(), passwordTextWatcher.getText()))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::onSuccess, this::onError);
+
+        switch (view.getId()){
+            case R.id.login:
+                restApi.login(new Login(usernameTextWatcher.getText(), passwordTextWatcher.getText()))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::onSuccess, this::onError);
+                break;
+            case R.id.sign_up:
+                getViewState().startRegisterActivity();
+                break;
+        }
+
     }
 
     private void onSuccess(ResponseBody responseBody) {
