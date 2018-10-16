@@ -4,6 +4,7 @@ import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.di.modules.AppModule;
 import com.unlogicon.typegram.di.modules.NetworkModule;
 import com.unlogicon.typegram.di.modules.RoomModule;
+import com.unlogicon.typegram.di.modules.SharedPreferencesModule;
 import com.unlogicon.typegram.presenters.activities.ArticleActivityPresenter;
 import com.unlogicon.typegram.presenters.activities.MainActivityPresenter;
 import com.unlogicon.typegram.services.FcmServices;
@@ -16,7 +17,7 @@ import dagger.Component;
  * Nikita Korovkin 11.10.2018.
  */
 
-@Component(modules = {AppModule.class, NetworkModule.class, RoomModule.class})
+@Component(modules = {AppModule.class, NetworkModule.class, RoomModule.class, SharedPreferencesModule.class})
 @Singleton
 public interface AppComponent {
 
