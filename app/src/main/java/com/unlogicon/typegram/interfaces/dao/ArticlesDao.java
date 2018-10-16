@@ -10,8 +10,6 @@ import com.unlogicon.typegram.models.Article;
 
 import java.util.List;
 
-import javax.inject.Singleton;
-
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 

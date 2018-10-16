@@ -5,7 +5,6 @@ import android.content.Context;
 import com.unlogicon.typegram.di.components.AppComponent;
 import com.unlogicon.typegram.di.components.DaggerAppComponent;
 import com.unlogicon.typegram.di.modules.AppModule;
-import com.unlogicon.typegram.di.modules.RoomModule;
 
 /**
  * Nikita Korovkin 11.10.2018.

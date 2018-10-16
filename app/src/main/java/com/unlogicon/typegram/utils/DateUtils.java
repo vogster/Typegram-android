@@ -1,8 +1,5 @@
 package com.unlogicon.typegram.utils;
 
-import android.content.Context;
-import android.content.res.Resources;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

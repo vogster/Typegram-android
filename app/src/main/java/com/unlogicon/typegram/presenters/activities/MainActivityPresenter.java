@@ -1,30 +1,27 @@
 package com.unlogicon.typegram.presenters.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.unlogicon.typegram.Constants;
+import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
-import com.unlogicon.typegram.abstracts.AppDatabase;
 import com.unlogicon.typegram.adapters.MainRecyclerViewAdapter;
 import com.unlogicon.typegram.interfaces.activities.MainActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.interfaces.dao.ArticlesDao;
 import com.unlogicon.typegram.models.Article;
-import com.unlogicon.typegram.ui.activities.MainActivity;
-
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.FlowableSubscriber;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -46,6 +43,9 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     @Inject
     ArticlesDao articlesDao;
+
+    @Inject
+    Context context;
 
     public MainActivityPresenter() {
         TgramApplication.getInstance().getComponents().getAppComponent().inject(this);
@@ -72,7 +72,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                     getViewState().notifyDataSetChanged(adapter);
                     return articlesDb;
                 })
-                .subscribe(articles-> {
+                .subscribe(articles -> {
                     if (articlesList.isEmpty()) {
                         restApi.getArticles(lastID).subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
@@ -83,10 +83,10 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                                     return articlesWeb;
                                 })
                                 .subscribe(articles1 -> {
-                                            insertArticles(articles1)
-                                                    .subscribeOn(Schedulers.io())
-                                                    .subscribe();
-                                        });
+                                    insertArticles(articles1)
+                                            .subscribeOn(Schedulers.io())
+                                            .subscribe();
+                                }, this::onError);
                     }
                 });
 
@@ -120,13 +120,17 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                     if (articlesDb.isEmpty()) {
                         restApi.getArticles(lastID).subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(articles1 ->
-                                        insertArticles(articles1)
-                                                .subscribeOn(Schedulers.io())
-                                                .subscribe()
-                                );
+                                .subscribe(articles1 -> {
+                                    insertArticles(articles1)
+                                            .subscribeOn(Schedulers.io())
+                                            .subscribe();
+                                }, this::onError);
                     }
 
                 });
+    }
+
+    private void onError(Throwable throwable) {
+        Toast.makeText(context, context.getString(R.string.error_network), Toast.LENGTH_LONG).show();
     }
 }

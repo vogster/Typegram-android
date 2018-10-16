@@ -5,7 +5,6 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.unlogicon.typegram.Constants;
 import com.unlogicon.typegram.TgramApplication;
-import com.unlogicon.typegram.abstracts.AppDatabase;
 import com.unlogicon.typegram.interfaces.dao.ArticlesDao;
 import com.unlogicon.typegram.models.Article;
 
@@ -13,8 +12,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class FcmServices extends FirebaseMessagingService {

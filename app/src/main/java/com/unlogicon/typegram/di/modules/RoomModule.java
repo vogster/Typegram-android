@@ -1,12 +1,10 @@
 package com.unlogicon.typegram.di.modules;
 
-import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.unlogicon.typegram.abstracts.AppDatabase;
 import com.unlogicon.typegram.interfaces.dao.ArticlesDao;
-import com.unlogicon.typegram.models.Article;
 
 import javax.inject.Singleton;
 

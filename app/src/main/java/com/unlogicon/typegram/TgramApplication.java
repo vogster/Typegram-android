@@ -2,9 +2,7 @@ package com.unlogicon.typegram;
 
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 
-import com.unlogicon.typegram.abstracts.AppDatabase;
 import com.unlogicon.typegram.di.Components;
 
 public class TgramApplication extends Application {

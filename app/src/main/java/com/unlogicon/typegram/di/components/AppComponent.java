@@ -2,8 +2,8 @@ package com.unlogicon.typegram.di.components;
 
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.di.modules.AppModule;
-import com.unlogicon.typegram.di.modules.RoomModule;
 import com.unlogicon.typegram.di.modules.NetworkModule;
+import com.unlogicon.typegram.di.modules.RoomModule;
 import com.unlogicon.typegram.presenters.activities.ArticleActivityPresenter;
 import com.unlogicon.typegram.presenters.activities.MainActivityPresenter;
 import com.unlogicon.typegram.services.FcmServices;
