@@ -38,7 +38,7 @@ public class NetworkModule {
                     Request request = chain.request();
                     Request newRequest;
                     newRequest = request.newBuilder()
-                            .addHeader("Content-type", "application/json")
+                            .addHeader("Content-Type", "application/json")
                             .build();
                     return chain.proceed(newRequest);})
                 .build();

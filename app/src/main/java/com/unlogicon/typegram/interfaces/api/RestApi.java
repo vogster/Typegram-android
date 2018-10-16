@@ -1,11 +1,16 @@
 package com.unlogicon.typegram.interfaces.api;
 
 import com.unlogicon.typegram.models.Article;
+import com.unlogicon.typegram.models.Login;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -35,5 +40,14 @@ public interface RestApi {
             @Path("user") String user,
             @Path("id") int id
     );
+
+    /**
+     * Логин
+     * @param body {"username":"username","password":"password"}
+     * @return
+     */
+    @POST("login")
+    @Headers("Content-Type: application/json")
+    Observable<ResponseBody> login(@Body Login body);
 
 }
