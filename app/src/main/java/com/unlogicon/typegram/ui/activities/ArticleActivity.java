@@ -7,6 +7,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.unlogicon.typegram.Constants;
 import com.unlogicon.typegram.R;
+import com.unlogicon.typegram.adapters.CommentsAdapter;
 import com.unlogicon.typegram.interfaces.activities.ArticleActivityView;
 import com.unlogicon.typegram.presenters.activities.ArticleActivityPresenter;
 
@@ -47,6 +50,8 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
 
     private AppCompatImageView avatar;
 
+    private RecyclerView listComments;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,11 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
         avatar = findViewById(R.id.avatar);
         author = findViewById(R.id.author);
         date = findViewById(R.id.date);
+
+        listComments = findViewById(R.id.listComments);
+        listComments.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        listComments.setLayoutManager(layoutManager);
 
         errorLayout = findViewById(R.id.errorLayout);
         loadingLayout = findViewById(R.id.loadingLayout);
@@ -131,6 +141,11 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
     @Override
     public void openLinkInBrowser(Intent intent) {
         this.startActivity(intent);
+    }
+
+    @Override
+    public void setCommentsAdapter(CommentsAdapter adapter) {
+        listComments.setAdapter(adapter);
     }
 
     @Override

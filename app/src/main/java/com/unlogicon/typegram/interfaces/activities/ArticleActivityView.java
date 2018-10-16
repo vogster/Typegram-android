@@ -3,6 +3,7 @@ package com.unlogicon.typegram.interfaces.activities;
 import android.content.Intent;
 
 import com.arellomobile.mvp.MvpView;
+import com.unlogicon.typegram.adapters.CommentsAdapter;
 
 /**
  * Nikita Korovkin 08.10.2018.
@@ -25,4 +26,6 @@ public interface ArticleActivityView extends MvpView {
     void setDate(String date);
 
     void openLinkInBrowser(Intent intent);
+
+    void setCommentsAdapter(CommentsAdapter adapter);
 }

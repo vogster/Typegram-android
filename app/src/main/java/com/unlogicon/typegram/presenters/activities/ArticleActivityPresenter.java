@@ -11,6 +11,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
+import com.unlogicon.typegram.adapters.CommentsAdapter;
 import com.unlogicon.typegram.interfaces.activities.ArticleActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.models.Article;
@@ -18,6 +19,9 @@ import com.unlogicon.typegram.ui.activities.ArticleActivity;
 import com.unlogicon.typegram.utils.DateUtils;
 import com.unlogicon.typegram.utils.NetworkUtils;
 import com.unlogicon.typegram.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -40,6 +44,9 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
 
     private int id;
     private String user;
+
+    private CommentsAdapter adapter;
+    private List<Article> comments = new ArrayList<>();
 
     public ArticleActivityPresenter() {
         TgramApplication.getInstance().getComponents().getAppComponent().inject(this);
@@ -76,6 +83,7 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
 
 
     private void onSuccess(Article article) {
+        comments = article.getComments();
         getViewState().setTextArticle(article.getBody());
         getViewState().setTitleText(article.getTitle());
         getViewState().setAuthor("@" + article.getAuthor());
@@ -83,6 +91,8 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
         getViewState().loadAvatar(article.getAuthor());
         currentArtcile = article;
         getViewState().setLoadingLayoutVisibility(View.GONE);
+        adapter = new CommentsAdapter(comments);
+        getViewState().setCommentsAdapter(adapter);
     }
 
     private void onError(Throwable throwable) {
