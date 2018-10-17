@@ -100,9 +100,11 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
 
 
     private void onSuccess(Article article) {
-        comments.clear();
-        comments.addAll(article.getComments());
-        adapter.notifyDataSetChanged();
+        if (article.getComments() != null) {
+            comments.clear();
+            comments.addAll(article.getComments());
+            adapter.notifyDataSetChanged();
+        }
         getViewState().setTextArticle(article.getBody());
         getViewState().setTitleText(article.getTitle());
         getViewState().setAuthor("@" + article.getAuthor());
