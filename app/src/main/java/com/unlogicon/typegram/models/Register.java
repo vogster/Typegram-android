@@ -7,10 +7,10 @@ public class Register {
 
     private String username;
     private String password;
-    private boolean privacy;
-    private boolean terms;
+    private String privacy;
+    private String terms;
 
-    public Register(String username, String password, boolean privacy, boolean terms){
+    public Register(String username, String password, String privacy, String terms){
         this.username = username;
         this.password = password;
         this.privacy = privacy;

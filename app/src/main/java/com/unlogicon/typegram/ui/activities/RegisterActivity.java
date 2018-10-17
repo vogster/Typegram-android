@@ -1,5 +1,6 @@
 package com.unlogicon.typegram.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -30,6 +31,9 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
+        presenter.setUsernameTextWatcher(username);
+        presenter.setPasswordTextWatcher(password);
+
         chackbox_1 = findViewById(R.id.checkbox_1);
         checkbox_2 = findViewById(R.id.checkbox_2);
         checkbox_3 = findViewById(R.id.checkbox_3);
@@ -39,5 +43,18 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
 
         sing_up = findViewById(R.id.sign_up);
         sing_up.setOnClickListener(presenter::onClick);
+
+    }
+
+    @Override
+    public void setSingUpEnabled(boolean enabled) {
+        sing_up.setEnabled(enabled);
+    }
+
+    @Override
+    public void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
