@@ -12,7 +12,7 @@ import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.interfaces.activities.RegisterView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
-import com.unlogicon.typegram.models.Register;
+import com.unlogicon.typegram.models.PostRegister;
 import com.unlogicon.typegram.tools.RxTextWatcher;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 
@@ -54,7 +54,7 @@ public class RegisterPresenter extends MvpPresenter<RegisterView> {
 
 
     public void onClick(View view) {
-        restApi.register(new Register(usernameTextWatcher.getText(), passwordTextWatcher.getText(), "privacy", "terms"))
+        restApi.register(new PostRegister(usernameTextWatcher.getText(), passwordTextWatcher.getText(), "privacy", "terms"))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::onSuccess, this::onError);

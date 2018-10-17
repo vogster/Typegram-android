@@ -1,13 +1,8 @@
 package com.unlogicon.typegram.presenters.activities;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -15,10 +10,9 @@ import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.interfaces.activities.LoginView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
-import com.unlogicon.typegram.models.Login;
+import com.unlogicon.typegram.models.PostLogin;
 import com.unlogicon.typegram.tools.RxTextWatcher;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
-import com.unlogicon.typegram.utils.StringUtils;
 
 import java.io.IOException;
 
@@ -59,7 +53,7 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
 
         switch (view.getId()){
             case R.id.login:
-                restApi.login(new Login(usernameTextWatcher.getText(), passwordTextWatcher.getText()))
+                restApi.login(new PostLogin(usernameTextWatcher.getText(), passwordTextWatcher.getText()))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(this::onSuccess, this::onError);

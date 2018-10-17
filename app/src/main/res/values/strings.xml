@@ -6,7 +6,7 @@
     <!-- Menu -->
     <string name="open_in_web">Открыть в браузере</string>
     
-    <!-- Login -->
+    <!-- PostLogin -->
     <string name="sign_in">Sign in</string>
     <string name="sign_in_descr">Need an account?</string>
     <string name="username">username</string>

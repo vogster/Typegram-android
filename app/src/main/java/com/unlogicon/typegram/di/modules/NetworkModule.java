@@ -38,7 +38,7 @@ public class NetworkModule {
                     Request original = chain.request();
                     Request request = original.newBuilder()
                             .addHeader("content-type", "application/json")
-                            .addHeader("cookie", "token="+sharedPreferencesUtils.getToken())
+                            .addHeader("Authorization", "token "+ sharedPreferencesUtils.getToken())
                             .method(original.method(), original.body())
                             .build();
                     return chain.proceed(request);})

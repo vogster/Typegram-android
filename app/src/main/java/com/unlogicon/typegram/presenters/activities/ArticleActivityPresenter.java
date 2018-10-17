@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +16,7 @@ import com.unlogicon.typegram.adapters.CommentsAdapter;
 import com.unlogicon.typegram.interfaces.activities.ArticleActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.models.Article;
+import com.unlogicon.typegram.models.PostArticle;
 import com.unlogicon.typegram.tools.RxTextWatcher;
 import com.unlogicon.typegram.ui.activities.ArticleActivity;
 import com.unlogicon.typegram.utils.DateUtils;
@@ -131,7 +131,7 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
                 requestGetArticle();
                 break;
             case R.id.sendComment:
-                restApi.sendComment(currentArtcile.getAuthor(), currentArtcile.getID(), commentTextWatcher.getText())
+                restApi.postComment(currentArtcile.getAuthor(), currentArtcile.getID(), new PostArticle(commentTextWatcher.getText()))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(this::onSuccess, this::onError);

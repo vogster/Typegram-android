@@ -3,12 +3,12 @@ package com.unlogicon.typegram.models;
 /**
  * Nikita Korovkin 16.10.2018.
  */
-public class Login {
+public class PostLogin {
 
     private String username;
     private String password;
 
-    public Login(String username, String password){
+    public PostLogin(String username, String password){
         this.username = username;
         this.password = password;
     }

@@ -1,8 +1,9 @@
 package com.unlogicon.typegram.interfaces.api;
 
 import com.unlogicon.typegram.models.Article;
-import com.unlogicon.typegram.models.Login;
-import com.unlogicon.typegram.models.Register;
+import com.unlogicon.typegram.models.PostArticle;
+import com.unlogicon.typegram.models.PostLogin;
+import com.unlogicon.typegram.models.PostRegister;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public interface RestApi {
      */
     @POST("login")
     @Headers("Content-Type: application/json")
-    Observable<ResponseBody> login(@Body Login body);
+    Observable<ResponseBody> login(@Body PostLogin body);
 
     /**
      * Регистрация
@@ -60,18 +61,29 @@ public interface RestApi {
      */
     @POST("register")
     @Headers("Content-Type: application/json")
-    Observable<ResponseBody> register(@Body Register body);
+    Observable<ResponseBody> register(@Body PostRegister body);
 
     /**
      * Отправить комментарий
      * @param username  имя юзера, без @
      * @param article_id  id статьи
-     * @param comment сам коммент
+     * @param article сам коммент
      * @return
      */
-    @POST("comments/@{username}/{article_id}")
     @FormUrlEncoded
-    Observable<ResponseBody> sendComment(@Path("username") String username,
+    @POST("comments/@{username}/{article_id}")
+    @Headers("Content-Type: application/json")
+    Observable<ResponseBody> postComment(@Path("username") String username,
                                          @Path("article_id") int article_id,
-                                         @Field("body") String comment);
+                                         @Body PostArticle article);
+
+    /**
+     * Отправить пост
+     * @param article пост
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("editor/0")
+    @Headers("Content-Type: application/json")
+    Observable<ResponseBody> postArticle(@Body PostArticle article);
 }
