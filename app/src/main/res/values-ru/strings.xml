@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Registration -->
+    <string name="sign_up">Регистрация</string>
+    <string name="sign_up_descr">9.5 секунд займет регистрация. Введите логин, пароль и поставьте 2 галки снизу.</string>
+    <string name="sing_up_username_hint">username, alphanum, 1..20</string>
+    <string name="sign_up_password_hint">password, 6..255</string>
+    <string name="sign_up_checkbox_1">Я пришел чтобы спамить и мешать другим</string>
+    <string name="sign_up_checkbox_2">Я прочёл и принимаю</string>
+    <string name="sign_up_checkbox_3">Я прочёл и принимаю</string>
+
+
+    
+</resources>

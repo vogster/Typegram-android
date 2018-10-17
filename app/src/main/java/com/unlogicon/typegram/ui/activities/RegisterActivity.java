@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -35,8 +38,17 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
         presenter.setPasswordTextWatcher(password);
 
         chackbox_1 = findViewById(R.id.checkbox_1);
+
         checkbox_2 = findViewById(R.id.checkbox_2);
+        checkbox_2.setText(Html.fromHtml(getString(R.string.sign_up_checkbox_2)
+                 + " "+ "<a href='https://ru.tgr.am/policy'>Typegram Privacy Statement</a>"));
+        checkbox_2.setMovementMethod(LinkMovementMethod.getInstance());
+
         checkbox_3 = findViewById(R.id.checkbox_3);
+        checkbox_3.setText(Html.fromHtml(getString(R.string.sign_up_checkbox_3)
+                + " "+ "<a href='https://ru.tgr.am/terms'>Typegram Terms of Service</a>"));
+        checkbox_3.setMovementMethod(LinkMovementMethod.getInstance());
+
         chackbox_1.setOnCheckedChangeListener(presenter::checkBoxChangeListener);
         checkbox_2.setOnCheckedChangeListener(presenter::checkBoxChangeListener);
         checkbox_3.setOnCheckedChangeListener(presenter::checkBoxChangeListener);
