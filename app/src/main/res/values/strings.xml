@@ -23,5 +23,9 @@
     <string name="sign_up_checkbox_2">I have read and accept the Typegram Privacy Statement</string>
     <string name="sign_up_checkbox_3">I have read and accept the Typegram Terms of Service</string>
 
+    <string name="comment">Comment</string>
+
+    <!-- Article -->
+    <string name="text_hint">text, markdown, 10..65536</string>
     
 </resources>

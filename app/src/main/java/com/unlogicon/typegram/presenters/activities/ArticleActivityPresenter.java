@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -15,9 +17,11 @@ import com.unlogicon.typegram.adapters.CommentsAdapter;
 import com.unlogicon.typegram.interfaces.activities.ArticleActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.models.Article;
+import com.unlogicon.typegram.tools.RxTextWatcher;
 import com.unlogicon.typegram.ui.activities.ArticleActivity;
 import com.unlogicon.typegram.utils.DateUtils;
 import com.unlogicon.typegram.utils.NetworkUtils;
+import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 import com.unlogicon.typegram.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 /**
  * Nikita Korovkin 08.10.2018.
@@ -42,11 +47,16 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
     @Inject
     RestApi restApi;
 
+    @Inject
+    SharedPreferencesUtils preferencesUtils;
+
     private int id;
     private String user;
 
     private CommentsAdapter adapter;
     private List<Article> comments = new ArrayList<>();
+
+    private RxTextWatcher commentTextWatcher;
 
     public ArticleActivityPresenter() {
         TgramApplication.getInstance().getComponents().getAppComponent().inject(this);
@@ -55,7 +65,14 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+        adapter = new CommentsAdapter(comments);
+        getViewState().setCommentsAdapter(adapter);
 
+        if (preferencesUtils.isAuth()){
+            getViewState().setCommentLayoutVisibility(View.VISIBLE);
+        } else {
+            getViewState().setCommentLayoutVisibility(View.GONE);
+        }
     }
 
 
@@ -83,7 +100,9 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
 
 
     private void onSuccess(Article article) {
-        comments = article.getComments();
+        comments.clear();
+        comments.addAll(article.getComments());
+        adapter.notifyDataSetChanged();
         getViewState().setTextArticle(article.getBody());
         getViewState().setTitleText(article.getTitle());
         getViewState().setAuthor("@" + article.getAuthor());
@@ -91,13 +110,16 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
         getViewState().loadAvatar(article.getAuthor());
         currentArtcile = article;
         getViewState().setLoadingLayoutVisibility(View.GONE);
-        adapter = new CommentsAdapter(comments);
-        getViewState().setCommentsAdapter(adapter);
     }
 
     private void onError(Throwable throwable) {
         getViewState().setErrorLayoutVisibility(View.VISIBLE);
         getViewState().setLoadingLayoutVisibility(View.GONE);
+    }
+
+    public void setCommentTextWatcher(EditText editText){
+        commentTextWatcher = new RxTextWatcher();
+        commentTextWatcher.watch(editText);
     }
 
     public void onClick(View view) {
@@ -106,8 +128,29 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
                 getViewState().setErrorLayoutVisibility(View.GONE);
                 requestGetArticle();
                 break;
+            case R.id.sendComment:
+                restApi.sendComment(currentArtcile.getAuthor(), currentArtcile.getID(), commentTextWatcher.getText())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::onSuccess, this::onError);
+                getViewState().setCommentText("");
+                break;
         }
 
+    }
+
+    private void onSuccess(ResponseBody responseBody) {
+        updateComments();
+    }
+
+    private void updateComments() {
+        restApi.getArticle(user, id).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(article ->{
+                    comments.clear();
+                    comments.addAll(article.getComments());
+                    adapter.notifyDataSetChanged();
+                });
     }
 
     public void onOptionsItemSelected(MenuItem item) {

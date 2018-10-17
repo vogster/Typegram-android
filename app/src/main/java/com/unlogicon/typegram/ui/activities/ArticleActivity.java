@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -52,6 +54,12 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
 
     private RecyclerView listComments;
 
+    private LinearLayout commentLayout;
+
+    private AppCompatEditText comment;
+
+    private AppCompatButton sendComment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +84,13 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
 
         retry = findViewById(R.id.retry);
         retry.setOnClickListener(presenter::onClick);
+
+        commentLayout = findViewById(R.id.commentLayout);
+        comment = findViewById(R.id.comment);
+        sendComment = findViewById(R.id.sendComment);
+        sendComment.setOnClickListener(presenter::onClick);
+
+        presenter.setCommentTextWatcher(comment);
 
         presenter.onCreate(getIntent());
 
@@ -146,6 +161,16 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
     @Override
     public void setCommentsAdapter(CommentsAdapter adapter) {
         listComments.setAdapter(adapter);
+    }
+
+    @Override
+    public void setCommentLayoutVisibility(int visibility) {
+        commentLayout.setVisibility(visibility);
+    }
+
+    @Override
+    public void setCommentText(String text) {
+        comment.setText(text);
     }
 
     @Override

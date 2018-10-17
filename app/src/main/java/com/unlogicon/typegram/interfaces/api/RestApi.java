@@ -9,6 +9,8 @@ import java.util.List;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -59,4 +61,17 @@ public interface RestApi {
     @POST("register")
     @Headers("Content-Type: application/json")
     Observable<ResponseBody> register(@Body Register body);
+
+    /**
+     * Отправить комментарий
+     * @param username  имя юзера, без @
+     * @param article_id  id статьи
+     * @param comment сам коммент
+     * @return
+     */
+    @POST("comments/@{username}/{article_id}")
+    @FormUrlEncoded
+    Observable<ResponseBody> sendComment(@Path("username") String username,
+                                         @Path("article_id") int article_id,
+                                         @Field("body") String comment);
 }

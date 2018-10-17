@@ -28,4 +28,8 @@ public interface ArticleActivityView extends MvpView {
     void openLinkInBrowser(Intent intent);
 
     void setCommentsAdapter(CommentsAdapter adapter);
+
+    void setCommentLayoutVisibility(int visibility);
+
+    void setCommentText(String text);
 }
