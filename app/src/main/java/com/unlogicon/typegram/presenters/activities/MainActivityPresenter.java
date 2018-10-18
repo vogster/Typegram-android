@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -62,8 +63,6 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-
-
 
         articlesList = new ArrayList<>();
         adapter = new MainRecyclerViewAdapter(articlesList);
@@ -158,7 +157,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
         Toast.makeText(context, context.getString(R.string.error_network), Toast.LENGTH_LONG).show();
     }
 
-    public void setMMenu(Menu menu) {
+    public void setMenu(Menu menu) {
         this.menu = menu;
         updateMenuTitles(menu);
     }
@@ -172,6 +171,18 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
         } else {
             menuSingIn.setTitle(context.getString(R.string.sign_in));
             menuSingOut.setVisible(false);
+        }
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.create_article:
+                if (!preferencesUtils.isAuth()){
+                    getViewState().startActivityLogin();
+                } else {
+                    getViewState().startActivityArticleEditor();
+                }
+                break;
         }
     }
 }

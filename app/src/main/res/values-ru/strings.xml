@@ -1,5 +1,20 @@
 <resources>
 
+    <string name="app_name">Typegram</string>
+    <string name="error_network">Что то пошло не так</string>
+    <string name="retry">Повторить</string>
+
+    <!-- Menu -->
+    <string name="open_in_web">Открыть в браузере</string>
+
+    <!-- PostLogin -->
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_descr">Need an account?</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+
+    <string name="log_out">Log out</string>
+
     <!-- Registration -->
     <string name="sign_up">Регистрация</string>
     <string name="sign_up_descr">9.5 секунд займет регистрация. Введите логин, пароль и поставьте 2 галки снизу.</string>
@@ -9,6 +24,17 @@
     <string name="sign_up_checkbox_2">Я прочёл и принимаю</string>
     <string name="sign_up_checkbox_3">Я прочёл и принимаю</string>
 
+    <string name="comment">Comment</string>
 
+    <!-- Article -->
+    <string name="text_hint">text, markdown, 10..65536</string>
+
+    <!-- Article Editor -->
+    <string name="editor_hint_title">title, text, 0..255</string>
+    <string name="editor_hint_ogimage">image, link, 0..255</string>
+    <string name="editor_hint_body">text, markdown, 10..65536</string>
+    <string name="editor_hint_tag">tag, without #, alphanum, 0..20</string>
+
+    <string name="publish">Опубликовать</string>
     
 </resources>

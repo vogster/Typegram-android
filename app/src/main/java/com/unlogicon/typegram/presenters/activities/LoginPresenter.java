@@ -10,8 +10,8 @@ import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.interfaces.activities.LoginView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
-import com.unlogicon.typegram.models.PostLogin;
-import com.unlogicon.typegram.tools.RxTextWatcher;
+import com.unlogicon.typegram.models.posts.PostLogin;
+import com.unlogicon.typegram.watchers.RxTextWatcher;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 
 import java.io.IOException;

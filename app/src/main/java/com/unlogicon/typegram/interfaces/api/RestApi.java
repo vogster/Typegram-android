@@ -1,9 +1,10 @@
 package com.unlogicon.typegram.interfaces.api;
 
 import com.unlogicon.typegram.models.Article;
-import com.unlogicon.typegram.models.PostArticle;
-import com.unlogicon.typegram.models.PostLogin;
-import com.unlogicon.typegram.models.PostRegister;
+import com.unlogicon.typegram.models.posts.PostArticle;
+import com.unlogicon.typegram.models.posts.PostComment;
+import com.unlogicon.typegram.models.posts.PostLogin;
+import com.unlogicon.typegram.models.posts.PostRegister;
 
 import java.util.List;
 
@@ -11,8 +12,6 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -68,14 +67,14 @@ public interface RestApi {
      * Отправить комментарий
      * @param username  имя юзера, без @
      * @param article_id  id статьи
-     * @param article сам коммент
+     * @param comment сам коммент
      * @return
      */
     @POST("comments/@{username}/{article_id}")
     @Headers("Content-Type: application/json")
     Observable<Response<Article>> postComment(@Path("username") String username,
                                              @Path("article_id") int article_id,
-                                             @Body PostArticle article);
+                                             @Body PostComment comment);
 
     /**
      * Отправить пост
@@ -84,5 +83,5 @@ public interface RestApi {
      */
     @POST("editor/0")
     @Headers("Content-Type: application/json")
-    Observable<ResponseBody> postArticle(@Body PostArticle article);
+    Observable<Response<ResponseBody>> postArticle(@Body PostArticle article);
 }

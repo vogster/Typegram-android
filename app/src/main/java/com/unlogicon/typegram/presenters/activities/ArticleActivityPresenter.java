@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -19,8 +18,8 @@ import com.unlogicon.typegram.interfaces.activities.ArticleActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.models.Article;
 import com.unlogicon.typegram.models.Error;
-import com.unlogicon.typegram.models.PostArticle;
-import com.unlogicon.typegram.tools.RxTextWatcher;
+import com.unlogicon.typegram.models.posts.PostComment;
+import com.unlogicon.typegram.watchers.RxTextWatcher;
 import com.unlogicon.typegram.ui.activities.ArticleActivity;
 import com.unlogicon.typegram.utils.DateUtils;
 import com.unlogicon.typegram.utils.NetworkUtils;
@@ -36,7 +35,6 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
-import retrofit2.adapter.rxjava2.HttpException;
 
 /**
  * Nikita Korovkin 08.10.2018.
@@ -137,7 +135,7 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
                 requestGetArticle();
                 break;
             case R.id.sendComment:
-                restApi.postComment(currentArtcile.getAuthor(), currentArtcile.getID(), new PostArticle(commentTextWatcher.getText()))
+                restApi.postComment(currentArtcile.getAuthor(), currentArtcile.getID(), new PostComment(commentTextWatcher.getText()))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(this::onSuccessComment, this::onError);

@@ -1,4 +1,4 @@
-package com.unlogicon.typegram.models;
+package com.unlogicon.typegram.models.posts;
 
 /**
  * Nikita Korovkin 16.10.2018.

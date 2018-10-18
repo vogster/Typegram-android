@@ -31,6 +31,10 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
@@ -68,5 +72,11 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

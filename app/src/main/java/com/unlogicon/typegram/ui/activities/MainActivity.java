@@ -2,6 +2,7 @@ package com.unlogicon.typegram.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -22,6 +23,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
 
     private RecyclerView recyclerView;
 
+    private FloatingActionButton createAcrticle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +42,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
             }
         });
 
+        createAcrticle = findViewById(R.id.create_article);
+        createAcrticle.setOnClickListener(presenter::onClick);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        presenter.setMMenu(menu);
+        presenter.setMenu(menu);
         return true;
     }
 
@@ -72,6 +78,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     @Override
     public void startActivityLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startActivityArticleEditor() {
+        Intent intent = new Intent(this, ArticleEditorActivity.class);
         startActivity(intent);
     }
 }

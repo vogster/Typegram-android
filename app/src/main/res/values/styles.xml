@@ -18,4 +18,8 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="AppTheme.Fab" parent="AppTheme">
+        <item name="colorAccent">@android:color/white</item>
+    </style>
+
 </resources>

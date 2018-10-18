@@ -12,8 +12,8 @@ import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.interfaces.activities.RegisterView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
-import com.unlogicon.typegram.models.PostRegister;
-import com.unlogicon.typegram.tools.RxTextWatcher;
+import com.unlogicon.typegram.models.posts.PostRegister;
+import com.unlogicon.typegram.watchers.RxTextWatcher;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 
 import java.io.IOException;

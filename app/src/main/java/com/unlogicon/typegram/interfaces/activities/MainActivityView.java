@@ -13,4 +13,7 @@ public interface MainActivityView extends MvpView {
     void addOnScrollListener(EndlessRecyclerViewScrollListener listener);
 
     void startActivityLogin();
+
+    void startActivityArticleEditor();
+
 }

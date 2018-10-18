@@ -4,7 +4,7 @@
     <string name="retry">Повторить</string>
 
     <!-- Menu -->
-    <string name="open_in_web">Открыть в браузере</string>
+    <string name="open_in_web">Open in web</string>
     
     <!-- PostLogin -->
     <string name="sign_in">Sign in</string>
@@ -27,5 +27,12 @@
 
     <!-- Article -->
     <string name="text_hint">text, markdown, 10..65536</string>
-    
+
+    <!-- Article Editor -->
+    <string name="editor_hint_title">title, text, 0..255</string>
+    <string name="editor_hint_ogimage">image, link, 0..255</string>
+    <string name="editor_hint_body">text, markdown, 10..65536</string>
+    <string name="editor_hint_tag">tag, without #, alphanum, 0..20</string>
+    <string name="publish">Publish</string>
+
 </resources>

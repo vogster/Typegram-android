@@ -1,4 +1,4 @@
-package com.unlogicon.typegram.tools;
+package com.unlogicon.typegram.watchers;
 
 import android.text.Editable;
 import android.text.TextWatcher;

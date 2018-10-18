@@ -29,6 +29,10 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         username = findViewById(R.id.username);
         presenter.setUsernameTextWatcher(username);
 
@@ -53,5 +57,11 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     public void startRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
