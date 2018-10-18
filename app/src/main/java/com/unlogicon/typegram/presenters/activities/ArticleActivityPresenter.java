@@ -4,18 +4,21 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.gson.Gson;
 import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.adapters.CommentsAdapter;
 import com.unlogicon.typegram.interfaces.activities.ArticleActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.models.Article;
+import com.unlogicon.typegram.models.Error;
 import com.unlogicon.typegram.models.PostArticle;
 import com.unlogicon.typegram.tools.RxTextWatcher;
 import com.unlogicon.typegram.ui.activities.ArticleActivity;
@@ -24,6 +27,7 @@ import com.unlogicon.typegram.utils.NetworkUtils;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 import com.unlogicon.typegram.utils.StringUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +35,8 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
+import retrofit2.Response;
+import retrofit2.adapter.rxjava2.HttpException;
 
 /**
  * Nikita Korovkin 08.10.2018.
@@ -115,6 +120,7 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
     }
 
     private void onError(Throwable throwable) {
+        getViewState().showSnackbar(throwable.getMessage());
         getViewState().setErrorLayoutVisibility(View.VISIBLE);
         getViewState().setLoadingLayoutVisibility(View.GONE);
     }
@@ -134,26 +140,27 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
                 restApi.postComment(currentArtcile.getAuthor(), currentArtcile.getID(), new PostArticle(commentTextWatcher.getText()))
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(this::onSuccess, this::onError);
-                getViewState().setCommentText("");
+                        .subscribe(this::onSuccessComment, this::onError);
                 break;
         }
 
     }
 
-    private void onSuccess(ResponseBody responseBody) {
-        updateComments();
+    private void onSuccessComment(Response<Article> articleResponse) {
+        if (articleResponse.code() == 200){
+            getViewState().setCommentText("");
+            comments.add(articleResponse.body());
+            adapter.notifyDataSetChanged();
+        } else {
+            try {
+                getViewState().showSnackbar(new Gson().fromJson(articleResponse.errorBody().string(), Error.class).getError());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    private void updateComments() {
-        restApi.getArticle(user, id).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(article ->{
-                    comments.clear();
-                    comments.addAll(article.getComments());
-                    adapter.notifyDataSetChanged();
-                });
-    }
+
 
     public void onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

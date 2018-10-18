@@ -32,4 +32,6 @@ public interface ArticleActivityView extends MvpView {
     void setCommentLayoutVisibility(int visibility);
 
     void setCommentText(String text);
+
+    void showSnackbar(String text);
 }

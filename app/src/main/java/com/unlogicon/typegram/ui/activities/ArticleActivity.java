@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
@@ -171,6 +172,12 @@ public class ArticleActivity extends MvpAppCompatActivity implements ArticleActi
     @Override
     public void setCommentText(String text) {
         comment.setText(text);
+    }
+
+    @Override
+    public void showSnackbar(String text) {
+        Snackbar.make(commentLayout, text, Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override
