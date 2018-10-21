@@ -7,9 +7,9 @@
     <!-- Menu -->
     <string name="open_in_web">Открыть в браузере</string>
 
-    <!-- PostLogin -->
-    <string name="sign_in">Sign in</string>
-    <string name="sign_in_descr">Need an account?</string>
+    <!-- Login -->
+    <string name="sign_in">Войти</string>
+    <string name="sign_in_descr">Нет аккауната? Зарегистрируйтесь</string>
     <string name="username">username</string>
     <string name="password">password</string>
 

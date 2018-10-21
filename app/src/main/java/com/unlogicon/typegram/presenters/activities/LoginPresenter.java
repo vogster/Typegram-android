@@ -58,7 +58,7 @@ public class LoginPresenter extends MvpPresenter<LoginView> {
                         .subscribeOn(Schedulers.io())
                         .subscribe(this::onSuccess, this::onError);
                 break;
-            case R.id.sign_up:
+            case R.id.needAnAcc:
                 getViewState().startRegisterActivity();
                 break;
         }

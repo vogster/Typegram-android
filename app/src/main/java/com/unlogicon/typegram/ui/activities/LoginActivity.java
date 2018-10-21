@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -24,7 +23,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     LoginPresenter presenter;
 
     private AppCompatEditText username, password;
-    private AppCompatButton login, signUp;
+    private AppCompatButton login;
     private AppCompatTextView needAnAcc;
 
     @Override
@@ -32,8 +31,12 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         username = findViewById(R.id.username);
@@ -45,12 +48,9 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         login = findViewById(R.id.login);
         login.setOnClickListener(presenter::onClick);
 
-        signUp = findViewById(R.id.sign_up);
-        signUp.setOnClickListener(presenter::onClick);
-
         needAnAcc = findViewById(R.id.needAnAcc);
-
         needAnAcc.setPaintFlags(needAnAcc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        needAnAcc.setOnClickListener(presenter::onClick);
     }
 
     @Override
