@@ -52,7 +52,7 @@ public interface RestApi {
      */
     @POST("login")
     @Headers("Content-Type: application/json")
-    Observable<ResponseBody> login(@Body PostLogin body);
+    Observable<Response<ResponseBody>> login(@Body PostLogin body);
 
     /**
      * Регистрация
