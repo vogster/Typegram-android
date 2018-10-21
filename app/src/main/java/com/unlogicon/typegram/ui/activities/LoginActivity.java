@@ -1,9 +1,11 @@
 package com.unlogicon.typegram.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,6 +25,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     private AppCompatEditText username, password;
     private AppCompatButton login, signUp;
+    private AppCompatTextView needAnAcc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,10 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
         signUp = findViewById(R.id.sign_up);
         signUp.setOnClickListener(presenter::onClick);
+
+        needAnAcc = findViewById(R.id.needAnAcc);
+
+        needAnAcc.setPaintFlags(needAnAcc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     @Override
