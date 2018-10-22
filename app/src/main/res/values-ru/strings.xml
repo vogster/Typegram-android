@@ -41,5 +41,6 @@
     <string name="editor_hint_tag">tag, without #, alphanum, 0..20</string>
 
     <string name="publish">Опубликовать</string>
+    <string name="need_permissions">Нуно разрешение на чтение карты памяти</string>
     
 </resources>
