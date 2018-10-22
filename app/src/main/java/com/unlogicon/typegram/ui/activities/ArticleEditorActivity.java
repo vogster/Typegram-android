@@ -113,6 +113,7 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
 
     @Override
     public void finishActivity() {
+        setResult(RESULT_OK);
         finish();
     }
 

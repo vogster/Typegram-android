@@ -1,7 +1,9 @@
 package com.unlogicon.typegram.presenters.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,8 @@ import com.unlogicon.typegram.interfaces.activities.MainActivityView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
 import com.unlogicon.typegram.interfaces.dao.ArticlesDao;
 import com.unlogicon.typegram.models.Article;
+import com.unlogicon.typegram.ui.activities.ArticleEditorActivity;
+import com.unlogicon.typegram.ui.activities.MainActivity;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -104,6 +108,8 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     }
 
+
+
     private Observable insertArticles(List<Article> articles) {
         return new Observable() {
             @Override
@@ -181,4 +187,19 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MainActivity.ACTIVITY_EDITOR && resultCode == Activity.RESULT_OK) {
+            updateArticle();
+        }
+    }
+
+    private void updateArticle() {
+        restApi.getArticles(0).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(articles1 -> {
+                    insertArticles(articles1)
+                            .subscribeOn(Schedulers.io())
+                            .subscribe();
+                });
+    }
 }

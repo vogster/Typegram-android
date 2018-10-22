@@ -24,6 +24,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
 
     private RecyclerView recyclerView;
 
+    public static final int ACTIVITY_EDITOR = 100;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     @Override
     public void startActivityArticleEditor() {
         Intent intent = new Intent(this, ArticleEditorActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_EDITOR);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 }
