@@ -20,6 +20,7 @@ import com.unlogicon.typegram.enums.EditorEnum;
 import com.unlogicon.typegram.enums.MarkdownToolBarEnum;
 import com.unlogicon.typegram.interfaces.activities.ArticleEditorView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
+import com.unlogicon.typegram.models.Article;
 import com.unlogicon.typegram.models.Error;
 import com.unlogicon.typegram.models.posts.PostArticle;
 import com.unlogicon.typegram.ui.activities.ArticleEditorActivity;
@@ -28,9 +29,12 @@ import com.unlogicon.typegram.watchers.RxEditorTextWatcher;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
@@ -71,10 +75,8 @@ public class ArticleEditorPresenter extends MvpPresenter<ArticleEditorView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        getViewState().setTitleText(editorPreferencesUtils.getTitle());
-        getViewState().setOgimageText(editorPreferencesUtils.getOgimgae());
-        getViewState().setBodyText(editorPreferencesUtils.getBody());
-        getViewState().setTagText(editorPreferencesUtils.getTag());
+       loadTemp().subscribeOn(Schedulers.io())
+               .subscribe();
     }
 
     public void setTitleTextWatcher(AppCompatEditText title) {
@@ -177,5 +179,16 @@ public class ArticleEditorPresenter extends MvpPresenter<ArticleEditorView> {
                 getViewState().openImage();
                 break;
         }
+    }
+    private Observable loadTemp() {
+        return new Observable() {
+            @Override
+            protected void subscribeActual(Observer observer) {
+                getViewState().setTitleText(editorPreferencesUtils.getTitle());
+                getViewState().setOgimageText(editorPreferencesUtils.getOgimgae());
+                getViewState().setBodyText(editorPreferencesUtils.getBody());
+                getViewState().setTagText(editorPreferencesUtils.getTag());
+            }
+        };
     }
 }
