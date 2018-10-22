@@ -7,4 +7,8 @@ public interface RegisterView extends MvpView {
     void setSingUpEnabled(boolean enabled);
 
     void startMainActivity();
+
+    void startLoginActivity();
+
+    void showSnackbar(String text);
 }

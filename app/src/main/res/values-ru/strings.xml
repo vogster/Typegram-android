@@ -17,6 +17,7 @@
 
     <!-- Registration -->
     <string name="sign_up">Регистрация</string>
+    <string name="sign_already_account">Уже есть аккаунт? Войти</string>
     <string name="sign_up_descr">9.5 секунд займет регистрация. Введите логин, пароль и поставьте 2 галки снизу.</string>
     <string name="sing_up_username_hint">username, alphanum, 1..20</string>
     <string name="sign_up_password_hint">password, 6..255</string>

@@ -8,10 +8,12 @@ import android.widget.EditText;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.google.gson.Gson;
 import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.interfaces.activities.RegisterView;
 import com.unlogicon.typegram.interfaces.api.RestApi;
+import com.unlogicon.typegram.models.Error;
 import com.unlogicon.typegram.models.posts.PostRegister;
 import com.unlogicon.typegram.watchers.RxTextWatcher;
 import com.unlogicon.typegram.utils.SharedPreferencesUtils;
@@ -23,6 +25,7 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 @InjectViewState
 public class RegisterPresenter extends MvpPresenter<RegisterView> {
@@ -54,19 +57,32 @@ public class RegisterPresenter extends MvpPresenter<RegisterView> {
 
 
     public void onClick(View view) {
-        restApi.register(new PostRegister(usernameTextWatcher.getText(), passwordTextWatcher.getText(), "privacy", "terms"))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::onSuccess, this::onError);
+        switch (view.getId()){
+            case R.id.sign_up:
+                restApi.register(new PostRegister(usernameTextWatcher.getText(), passwordTextWatcher.getText(), "privacy", "terms"))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::onSuccess, this::onError);
+                break;
+            case R.id.already_account:
+                getViewState().startLoginActivity();
+                break;
+        }
 
     }
 
-    private void onSuccess(ResponseBody responseBody) {
-        if (responseBody != null){
+    private void onSuccess(Response<ResponseBody> responseBodyResponse) {
+        if (responseBodyResponse.code() == 200){
             try {
-                preferencesUtils.setToken(responseBody.string().replace("\"",""));
+                preferencesUtils.setToken(responseBodyResponse.body().string().replace("\"",""));
                 preferencesUtils.setUsername(usernameTextWatcher.getText());
                 getViewState().startMainActivity();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                getViewState().showSnackbar(new Gson().fromJson(responseBodyResponse.errorBody().string(), Error.class).getError());
             } catch (IOException e) {
                 e.printStackTrace();
             }

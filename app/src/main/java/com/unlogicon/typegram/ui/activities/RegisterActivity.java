@@ -1,12 +1,17 @@
 package com.unlogicon.typegram.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -26,16 +31,30 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
 
     private AppCompatButton sing_up;
 
+    private AppCompatTextView allready_account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         username = findViewById(R.id.username);
+        username.setFilters(new InputFilter[] {
+                new InputFilter.AllCaps() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        return String.valueOf(source).toLowerCase();
+                    }
+                }
+        });
         password = findViewById(R.id.password);
 
         presenter.setUsernameTextWatcher(username);
@@ -60,6 +79,10 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
         sing_up = findViewById(R.id.sign_up);
         sing_up.setOnClickListener(presenter::onClick);
 
+        allready_account = findViewById(R.id.already_account);
+        allready_account.setPaintFlags(allready_account.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        allready_account.setOnClickListener(presenter::onClick);
+
     }
 
     @Override
@@ -70,6 +93,19 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
     @Override
     public void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showSnackbar(String text) {
+        Snackbar.make(username, text, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    @Override
+    public void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

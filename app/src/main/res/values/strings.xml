@@ -16,6 +16,7 @@
 
     <!-- Registration -->
     <string name="sign_up">Sign up</string>
+    <string name="sign_already_account">Already have an account? Click here</string>
     <string name="sign_up_descr">9.5 seconds will take registration. Enter your login, password and put 2 daws below.</string>
     <string name="sing_up_username_hint">username, alphanum, 1..20</string>
     <string name="sign_up_password_hint">password, 6..255</string>

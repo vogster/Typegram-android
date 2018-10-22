@@ -61,7 +61,7 @@ public interface RestApi {
      */
     @POST("register")
     @Headers("Content-Type: application/json")
-    Observable<ResponseBody> register(@Body PostRegister body);
+    Observable<Response<ResponseBody>> register(@Body PostRegister body);
 
     /**
      * Отправить комментарий
