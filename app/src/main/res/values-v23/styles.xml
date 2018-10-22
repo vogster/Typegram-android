@@ -10,6 +10,7 @@
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:actionMenuTextAppearance">@android:style/TextAppearance.Medium</item>
     </style>
 
     <style name="AppTheme.EditText" parent="AppTheme">

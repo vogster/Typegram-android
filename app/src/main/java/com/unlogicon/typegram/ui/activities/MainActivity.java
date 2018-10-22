@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,12 +24,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
 
     private RecyclerView recyclerView;
 
-    private FloatingActionButton createAcrticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -42,8 +46,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
             }
         });
 
-        createAcrticle = findViewById(R.id.create_article);
-        createAcrticle.setOnClickListener(presenter::onClick);
 
     }
 

@@ -150,6 +150,13 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                 preferencesUtils.singOut();
                 updateMenuTitles(menu);
                 break;
+            case R.id.action_new_article:
+                if (!preferencesUtils.isAuth()){
+                    getViewState().startActivityLogin();
+                } else {
+                    getViewState().startActivityArticleEditor();
+                }
+                break;
         }
     }
 
@@ -174,15 +181,4 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
         }
     }
 
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.create_article:
-                if (!preferencesUtils.isAuth()){
-                    getViewState().startActivityLogin();
-                } else {
-                    getViewState().startActivityArticleEditor();
-                }
-                break;
-        }
-    }
 }

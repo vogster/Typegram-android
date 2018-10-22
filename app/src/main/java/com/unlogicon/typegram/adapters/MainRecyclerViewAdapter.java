@@ -48,6 +48,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         viewHolder.author.setText(author);
         viewHolder.date.setText(DateUtils.timeAgo(articles.get(i).getCreatedAt()));
         viewHolder.title.setText(articles.get(i).getTitle());
+        if (articles.get(i).getTitle().equals("")){
+            viewHolder.title.setVisibility(View.GONE);
+        } else {
+            viewHolder.title.setVisibility(View.VISIBLE);
+            viewHolder.title.setText(articles.get(i).getTitle());
+        }
 
         Glide.with(context)
                 .load(Constants.BASE_AVA_URL.replace("%s", articles.get(i).getAuthor()))

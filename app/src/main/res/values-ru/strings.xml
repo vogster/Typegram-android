@@ -4,6 +4,10 @@
     <string name="error_network">Что то пошло не так</string>
     <string name="retry">Повторить</string>
 
+    <!-- Article list -->
+    <string name="main_title">typegram</string>
+    <string name="new_article">Новая статья</string>
+
     <!-- Menu -->
     <string name="open_in_web">Открыть в браузере</string>
 

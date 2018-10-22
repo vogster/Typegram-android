@@ -3,6 +3,10 @@
     <string name="error_network">Что то пошло не так</string>
     <string name="retry">Повторить</string>
 
+    <!-- Article list -->
+    <string name="main_title">typegram</string>
+    <string name="new_article">New article</string>
+
     <!-- Menu -->
     <string name="open_in_web">Open in web</string>
     

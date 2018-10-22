@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_new_article"
+        android:title="@string/new_article"
+        android:icon="@drawable/vector_add"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_sign_in"
         android:title="@string/sign_in"
         app:showAsAction="ifRoom">
