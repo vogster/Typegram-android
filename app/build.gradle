@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.unlogicon.typegram"
+        applicationId "ru.tgr.am"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
