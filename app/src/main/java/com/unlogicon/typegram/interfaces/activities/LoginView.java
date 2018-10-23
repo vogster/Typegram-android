@@ -10,4 +10,6 @@ public interface LoginView extends MvpView {
     void startMainActivity();
 
     void startRegisterActivity();
+
+    void showSnackbar(String text);
 }

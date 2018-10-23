@@ -1,11 +1,15 @@
 package com.unlogicon.typegram.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.Spanned;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -22,19 +26,32 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     LoginPresenter presenter;
 
     private AppCompatEditText username, password;
-    private AppCompatButton login, signUp;
+    private AppCompatButton login;
+    private AppCompatTextView needAnAcc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         username = findViewById(R.id.username);
         presenter.setUsernameTextWatcher(username);
+        username.setFilters(new InputFilter[] {
+                new InputFilter.AllCaps() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        return String.valueOf(source).toLowerCase();
+                    }
+                }
+        });
 
         password = findViewById(R.id.password);
         presenter.setPasswordTextWatcher(password);
@@ -42,8 +59,9 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         login = findViewById(R.id.login);
         login.setOnClickListener(presenter::onClick);
 
-        signUp = findViewById(R.id.sign_up);
-        signUp.setOnClickListener(presenter::onClick);
+        needAnAcc = findViewById(R.id.needAnAcc);
+        needAnAcc.setPaintFlags(needAnAcc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        needAnAcc.setOnClickListener(presenter::onClick);
     }
 
     @Override
@@ -57,6 +75,12 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     public void startRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void showSnackbar(String text) {
+        Snackbar.make(username, text, Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override

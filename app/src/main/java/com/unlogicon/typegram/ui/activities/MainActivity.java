@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,12 +24,17 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
 
     private RecyclerView recyclerView;
 
-    private FloatingActionButton createAcrticle;
+    public static final int ACTIVITY_EDITOR = 100;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -42,8 +48,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
             }
         });
 
-        createAcrticle = findViewById(R.id.create_article);
-        createAcrticle.setOnClickListener(presenter::onClick);
 
     }
 
@@ -84,6 +88,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainActivityVi
     @Override
     public void startActivityArticleEditor() {
         Intent intent = new Intent(this, ArticleEditorActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_EDITOR);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,6 +1,7 @@
 package com.unlogicon.typegram.interfaces.activities;
 
 import com.arellomobile.mvp.MvpView;
+import com.unlogicon.typegram.adapters.MarkdownToolbarAdapter;
 
 /**
  * Nikita Korovkin 18.10.2018.
@@ -18,4 +19,14 @@ public interface ArticleEditorView extends MvpView {
     void showSnackbar(String text);
 
     void finishActivity();
+
+    void openImage();
+
+    void showProgressSnackBar();
+
+    void hideProgressSnackBar();
+
+    void setMarkdownToolbarAdapter(MarkdownToolbarAdapter markdownToolbarAdapter);
+
+    void insertTextTotBody(String text);
 }

@@ -24,15 +24,23 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.activities.ArticleActivity"/>
-        <activity android:name=".ui.activities.LoginActivity"/>
-        <activity android:name=".ui.activities.RegisterActivity"/>
-        <activity android:name=".ui.activities.ArticleEditorActivity"/>
+        <activity android:name=".ui.activities.ArticleActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".ui.activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".ui.activities.RegisterActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".ui.activities.ArticleEditorActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
 
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 </manifest>

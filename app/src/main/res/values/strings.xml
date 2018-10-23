@@ -3,10 +3,14 @@
     <string name="error_network">Что то пошло не так</string>
     <string name="retry">Повторить</string>
 
+    <!-- Article list -->
+    <string name="main_title">typegram</string>
+    <string name="new_article">New article</string>
+
     <!-- Menu -->
     <string name="open_in_web">Open in web</string>
     
-    <!-- PostLogin -->
+    <!-- Login -->
     <string name="sign_in">Sign in</string>
     <string name="sign_in_descr">Need an account?</string>
     <string name="username">username</string>
@@ -16,6 +20,7 @@
 
     <!-- Registration -->
     <string name="sign_up">Sign up</string>
+    <string name="sign_already_account">Already have an account? Click here</string>
     <string name="sign_up_descr">9.5 seconds will take registration. Enter your login, password and put 2 daws below.</string>
     <string name="sing_up_username_hint">username, alphanum, 1..20</string>
     <string name="sign_up_password_hint">password, 6..255</string>
@@ -34,5 +39,6 @@
     <string name="editor_hint_body">text, markdown, 10..65536</string>
     <string name="editor_hint_tag">tag, without #, alphanum, 0..20</string>
     <string name="publish">Publish</string>
+    <string name="need_permissions">Need permissions</string>
 
 </resources>
