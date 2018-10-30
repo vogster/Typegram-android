@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:name=".TgramApplication"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_name" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/white" />
+
+
         <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +33,12 @@
         </service>
 
         <activity android:name=".ui.activities.ArticleActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="OPEN_ARTICLE_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".ui.activities.LoginActivity"
             android:windowSoftInputMode="adjustResize"/>
@@ -38,6 +51,8 @@
 
 
     </application>
+
+
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

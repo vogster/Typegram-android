@@ -22,9 +22,12 @@ public class FcmServices extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         TgramApplication.getInstance().getComponents().getAppComponent().inject(this);
-        insertArticles(remoteMessage)
-                .observeOn(Schedulers.io())
-                .subscribe();
+        if (remoteMessage.getFrom().equals("/topics/" + Constants.TOPIC) ||
+                remoteMessage.getFrom().equals("/topics/" + Constants.TOPIC_DEL)) {
+            insertArticles(remoteMessage)
+                    .observeOn(Schedulers.io())
+                    .subscribe();
+        }
     }
 
     private Observable insertArticles(final RemoteMessage remoteMessage) {

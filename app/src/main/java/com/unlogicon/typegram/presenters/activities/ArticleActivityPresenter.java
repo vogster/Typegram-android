@@ -86,7 +86,7 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
             getViewState().setLoadingLayoutVisibility(View.GONE);
         } else {
             if (intent.hasExtra(ArticleActivity.ID_EXTRA) && intent.hasExtra(ArticleActivity.USER_EXTRA)) {
-                id = intent.getIntExtra(ArticleActivity.ID_EXTRA, 0);
+                id = Integer.parseInt(intent.getStringExtra((ArticleActivity.ID_EXTRA)));
                 user = intent.getStringExtra(ArticleActivity.USER_EXTRA);
                 requestGetArticle();
             }

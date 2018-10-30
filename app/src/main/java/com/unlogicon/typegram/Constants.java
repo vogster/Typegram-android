@@ -20,5 +20,7 @@ public class Constants {
     public static final String TOPIC_DEL = "tst_del";
 //    public static final String TOPIC_DEL = "ru_del";
 
+    public static final String TOPIC_USER = "tst_%";
+
     public static final String BASE_AVA_URL = "https://ru.tgr.am/a/%s.png";
 }

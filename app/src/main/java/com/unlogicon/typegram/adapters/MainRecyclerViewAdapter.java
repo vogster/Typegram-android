@@ -63,7 +63,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         viewHolder.itemLayout.setOnClickListener(v ->{
             if (articles.get(i).getID() != null && articles.get(i).getAuthor() != null) {
                 Intent intent = new Intent(context, ArticleActivity.class);
-                intent.putExtra(ArticleActivity.ID_EXTRA, articles.get(i).getID());
+                intent.putExtra(ArticleActivity.ID_EXTRA, String.valueOf(articles.get(i).getID()));
                 intent.putExtra(ArticleActivity.USER_EXTRA, articles.get(i).getAuthor());
                 context.startActivity(intent);
             }
