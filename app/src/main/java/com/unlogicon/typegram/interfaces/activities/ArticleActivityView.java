@@ -34,4 +34,6 @@ public interface ArticleActivityView extends MvpView {
     void setCommentText(String text);
 
     void showSnackbar(String text);
+
+    void share(String url);
 }

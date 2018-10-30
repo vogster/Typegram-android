@@ -168,6 +168,11 @@ public class ArticleActivityPresenter extends MvpPresenter<ArticleActivityView> 
                     getViewState().openLinkInBrowser(browserIntent);
                 }
                 break;
+            case R.id.action_share:
+                if (currentArtcile != null) {
+                    getViewState().share(StringUtils.generateUrlFromArticle(currentArtcile));
+                }
+                break;
         }
     }
 }

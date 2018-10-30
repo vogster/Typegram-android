@@ -42,5 +42,6 @@
 
     <string name="publish">Опубликовать</string>
     <string name="need_permissions">Нуно разрешение на чтение карты памяти</string>
-    
+    <string name="share">Поделиться</string>
+
 </resources>

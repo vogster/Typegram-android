@@ -9,6 +9,7 @@
 
     <!-- Menu -->
     <string name="open_in_web">Open in web</string>
+    <string name="share">Share</string>
     
     <!-- Login -->
     <string name="sign_in">Sign in</string>
