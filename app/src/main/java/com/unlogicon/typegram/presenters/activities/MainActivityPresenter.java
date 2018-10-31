@@ -157,6 +157,7 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
                 }
                 break;
             case R.id.action_log_out:
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(Constants.TOPIC_USER.replace("%", preferencesUtils.getUsername()));
                 preferencesUtils.singOut();
                 updateMenuTitles(menu);
                 break;
