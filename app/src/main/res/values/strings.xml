@@ -40,6 +40,7 @@
     <string name="editor_hint_body">text, markdown, 10..65536</string>
     <string name="editor_hint_tag">tag, without #, alphanum, 0..20</string>
     <string name="publish">Publish</string>
+    <string name="preview">Preview</string>
     <string name="need_permissions">Need permissions</string>
 
 </resources>

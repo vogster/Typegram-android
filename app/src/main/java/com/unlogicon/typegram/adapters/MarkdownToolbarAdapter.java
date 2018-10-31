@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.unlogicon.typegram.R;
 import com.unlogicon.typegram.enums.MarkdownToolBarEnum;
 import com.unlogicon.typegram.interfaces.listeners.MarkdownToolbarCLickListeners;
+import com.unlogicon.typegram.markdown.MarkdownTextActions;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class MarkdownToolbarAdapter extends RecyclerView.Adapter<MarkdownToolbar
     private List<MarkdownToolBarEnum> toolBarEnums;
 
     private MarkdownToolbarCLickListeners cLickListeners;
+
+    private MarkdownTextActions markdownTextActions;
 
     public MarkdownToolbarAdapter() {
         toolBarEnums = MarkdownToolBarEnum.asList();
@@ -43,7 +46,8 @@ public class MarkdownToolbarAdapter extends RecyclerView.Adapter<MarkdownToolbar
         viewHolder.icon.setImageResource(toolBarEnums.get(i).getDrawableId());
         if (cLickListeners != null){
             viewHolder.icon.setOnClickListener(v -> {
-                cLickListeners.onClick(toolBarEnums.get(i));
+//                cLickListeners.onClick(toolBarEnums.get(i));
+                markdownTextActions.onClick(toolBarEnums.get(i));
             });
         }
     }
@@ -51,6 +55,10 @@ public class MarkdownToolbarAdapter extends RecyclerView.Adapter<MarkdownToolbar
     @Override
     public int getItemCount() {
         return toolBarEnums.size();
+    }
+
+    public void setMarkdownActions(MarkdownTextActions markdownTextActions) {
+        this.markdownTextActions = markdownTextActions;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

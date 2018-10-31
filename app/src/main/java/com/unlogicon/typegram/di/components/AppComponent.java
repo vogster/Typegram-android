@@ -8,6 +8,7 @@ import com.unlogicon.typegram.di.modules.NetworkModule;
 import com.unlogicon.typegram.di.modules.RoomModule;
 import com.unlogicon.typegram.di.modules.SharedPreferencesModule;
 import com.unlogicon.typegram.interfaces.api.RestApi;
+import com.unlogicon.typegram.markdown.MarkdownTextActions;
 import com.unlogicon.typegram.presenters.activities.ArticleActivityPresenter;
 import com.unlogicon.typegram.presenters.activities.LoginPresenter;
 import com.unlogicon.typegram.presenters.activities.MainActivityPresenter;
@@ -27,6 +28,10 @@ import retrofit2.Retrofit;
 @Singleton
 public interface AppComponent {
 
+    Context context();
+
+    RestApi restApi();
+
     void inject(TgramApplication application);
 
     void inject(ArticleActivityPresenter presenter);
@@ -39,7 +44,7 @@ public interface AppComponent {
 
     void inject(RegisterPresenter presenter);
 
-    Context context();
+    void inject(MarkdownTextActions markdownTextActions);
 
-    RestApi restApi();
+
 }

@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -65,6 +66,8 @@ public class ArticleEditorPresenter extends MvpPresenter<ArticleEditorView> {
 
     private MarkdownToolbarAdapter adapter;
 
+    private boolean previewMode = false;
+
     public ArticleEditorPresenter(){
         TgramApplication.getInstance().getComponents().getEditorComponent().inject(this);
         adapter = new MarkdownToolbarAdapter();
@@ -108,9 +111,19 @@ public class ArticleEditorPresenter extends MvpPresenter<ArticleEditorView> {
                         .subscribeOn(Schedulers.io())
                         .subscribe(this::onSuccess, this::onError);
                 break;
-                case R.id.action_attach_image:
-                    getViewState().openImage();
-                    break;
+            case R.id.action_preview:
+                if (!previewMode){
+                    item.setIcon(R.drawable.vector_baseline_visibility_off_24px);
+                    previewMode = true;
+                    getViewState().setTextArticle(bodyTextWatcher.getText());
+                    getViewState().setArticleVisibility(View.VISIBLE);
+                } else {
+                    item.setIcon(R.drawable.vector_baseline_visibility_24px);
+                    previewMode = false;
+                    getViewState().setArticleVisibility(View.GONE);
+                }
+
+                break;
         }
     }
 

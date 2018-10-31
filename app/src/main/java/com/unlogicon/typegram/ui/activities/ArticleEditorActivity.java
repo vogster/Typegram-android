@@ -30,9 +30,17 @@ import com.unlogicon.typegram.TgramApplication;
 import com.unlogicon.typegram.adapters.MainRecyclerViewAdapter;
 import com.unlogicon.typegram.adapters.MarkdownToolbarAdapter;
 import com.unlogicon.typegram.interfaces.activities.ArticleEditorView;
+import com.unlogicon.typegram.markdown.MarkdownTextActions;
 import com.unlogicon.typegram.presenters.activities.ArticleEditorPresenter;
 
 import java.io.File;
+import java.util.concurrent.Executors;
+
+import okhttp3.OkHttpClient;
+import ru.noties.markwon.SpannableConfiguration;
+import ru.noties.markwon.il.AsyncDrawableLoader;
+import ru.noties.markwon.il.NetworkSchemeHandler;
+import ru.noties.markwon.view.MarkwonViewCompat;
 
 /**
  * Nikita Korovkin 18.10.2018.
@@ -48,6 +56,10 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
     private Snackbar preogressSnackBar;
 
     private RecyclerView markdownToolbar;
+
+    private MarkdownTextActions markdownTextActions;
+
+    private MarkwonViewCompat article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +82,8 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
         body = findViewById(R.id.body);
         tag = findViewById(R.id.tag);
 
+        article = findViewById(R.id.article);
+
         presenter.setTitleTextWatcher(title);
         presenter.setOgimageTextWatcher(ogimage);
         presenter.setBodyTextWatcher(body);
@@ -78,7 +92,7 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
         markdownToolbar = findViewById(R.id.markdown_toolbar);
         markdownToolbar.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-
+        markdownTextActions = new MarkdownTextActions(this, body);
 
         preogressSnackBar = Snackbar.make(body, "Uploading...", Snackbar.LENGTH_INDEFINITE);
         Snackbar.SnackbarLayout snack_view = (Snackbar.SnackbarLayout) preogressSnackBar.getView();
@@ -93,6 +107,18 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
     @Override
     public void setOgimageText(String text) {
         ogimage.setText(text);
+    }
+
+    @Override
+    public void setTextArticle(String text) {
+        SpannableConfiguration spannableConfiguration = SpannableConfiguration.builder(this)
+                .asyncDrawableLoader(AsyncDrawableLoader.builder()
+                        .executorService(Executors.newCachedThreadPool())
+                        .addSchemeHandler(NetworkSchemeHandler.create(new OkHttpClient()))
+                        .build())
+
+                .build();
+        article.setMarkdown(spannableConfiguration, text);
     }
 
     @Override
@@ -147,6 +173,7 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
 
     @Override
     public void setMarkdownToolbarAdapter(MarkdownToolbarAdapter markdownToolbarAdapter) {
+        markdownToolbarAdapter.setMarkdownActions(markdownTextActions);
         markdownToolbar.setAdapter(markdownToolbarAdapter);
     }
 
@@ -156,6 +183,12 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
         int end = Math.max(body.getSelectionEnd(), 0);
         body.getText().replace(Math.min(start, end), Math.max(start, end),
                 text, 0, text.length());
+    }
+
+
+    @Override
+    public void setArticleVisibility(int visibility) {
+        article.setVisibility(visibility);
     }
 
     @Override
@@ -186,6 +219,8 @@ public class ArticleEditorActivity extends MvpAppCompatActivity implements Artic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MarkdownTextActions.PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            markdownTextActions.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

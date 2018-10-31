@@ -2,11 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_attach_image"
+        android:id="@+id/action_preview"
         android:orderInCategory="300"
-        android:icon="@drawable/vector_add"
-        android:title="@string/publish"
-        android:visible="false"
+        android:icon="@drawable/vector_baseline_visibility_24px"
+        android:title="@string/preview"
         app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/action_publish"

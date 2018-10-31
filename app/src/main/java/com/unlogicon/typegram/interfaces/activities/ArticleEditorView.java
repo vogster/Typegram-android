@@ -29,4 +29,8 @@ public interface ArticleEditorView extends MvpView {
     void setMarkdownToolbarAdapter(MarkdownToolbarAdapter markdownToolbarAdapter);
 
     void insertTextTotBody(String text);
+
+    void setTextArticle(String text);
+
+    void setArticleVisibility(int visibility);
 }
